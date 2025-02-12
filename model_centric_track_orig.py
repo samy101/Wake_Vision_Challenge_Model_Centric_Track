@@ -7,10 +7,10 @@ model_name = 'wv_k_8_c_5'
 
 #some hyperparameters 
 #Play with them!
-input_shape = (144,144,3)
-batch_size = 1024
+input_shape = (50,50,3)
+batch_size = 512
 learning_rate = 0.001
-epochs = 5
+epochs = 100
 
 #model architecture (with Quantization Aware Training - QAT)
 #Play with it!
@@ -77,11 +77,11 @@ data_preprocessing = tf.keras.Sequential([
     tf.keras.layers.Resizing(input_shape[0], input_shape[1])])
 
 data_augmentation = tf.keras.Sequential([
-    data_preprocessing])
+    data_preprocessing,
     #add some data augmentation 
     #Play with it!
-#    tf.keras.layers.RandomFlip("horizontal"),
-#    tf.keras.layers.RandomRotation(0.2)])
+    tf.keras.layers.RandomFlip("horizontal"),
+    tf.keras.layers.RandomRotation(0.2)])
     
 train_ds = train_ds.shuffle(1000).map(lambda x, y: (data_augmentation(x, training=True), y), num_parallel_calls=tf.data.AUTOTUNE).batch(batch_size).prefetch(tf.data.AUTOTUNE)
 val_ds = val_ds.map(lambda x, y: (data_preprocessing(x, training=True), y), num_parallel_calls=tf.data.AUTOTUNE).batch(batch_size).prefetch(tf.data.AUTOTUNE)
