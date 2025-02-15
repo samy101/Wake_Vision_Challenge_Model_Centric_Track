@@ -1,9 +1,16 @@
 # **Model-Centric Track**
 
-Team: Pandarasamy Arjunan, IISc Bangalore (samy@iisc.ac.in)
+**Team:** Pandarasamy Arjunan, IISc Bangalore ([samy@iisc.ac.in](mailto:samy@iisc.ac.in))  
+**Model Name:** wv_k_8_c_5_80_small  
 
-List of changes made to the original solution:
-1. input_shape = (144,144,3) - Ressonably large image size is requird for detecting persons
-2. batch_size = 1024         - (~0.1% of training samples. Increased this to handle large number of training samples.
-3. epochs = 5 (couldn't train for longer epochs due to longer training time)
-4. Removed all data augmentation techniques - data augmentation doesn't make sense bcoz samples are already diverse and idellay humans are expected to use the system in a normal position (heads up)
+## List of Changes Made to the Original Solution:
+
+1. **Input Shape:** Set to `(80,80,3)` – A reasonably large image size is required for person detection.  
+2. **Batch Size:** Increased to `2048` (~0.2% of training samples).
+3. **Epochs:** Limited to `5` due to long training times.  
+4. **Data Augmentation:** Removed, as the dataset is already diverse, making augmentation unnecessary.  
+5. **CNN Layers:** Adjusted filter sizes to `8, 16, 24, 32, and 40`. Removed the last CNN layer as it was not useful, and for reducing memory usage and MACs.  
+6. **Representative Dataset:** Increased to `20,000` samples (~1.4% of training samples) for PTQ to improve model weight calibration and reduce quantization error.  
+
+
+
